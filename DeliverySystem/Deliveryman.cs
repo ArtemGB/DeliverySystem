@@ -9,19 +9,32 @@ namespace DeliverySystem
     /// </summary>
     abstract class Deliveryman
     {
-        public int ID { get; private set; }
-        private static int globalID;
+        public abstract int ID { get; }
         public string Name { get; set; }
         public DeliveryStatus Status { get; set; }
-        public int Speed { get; private set; }
-        public int MaxDistance { get; private set; }
 
-        public Deliveryman(string name)
+        public abstract int Speed { get; protected set; }
+        public abstract int MaxDistance { get; protected set; }
+
+        public Deliveryman()
         {
-            Name = name;
+            Name = "";
             Status = DeliveryStatus.NotWorking;
         }
 
-        public virtual void Delivery() { }
+        public Deliveryman(string name)
+            : this()
+        {
+            Name = name;
+        }
+
+        public Deliveryman(string name, int speed, int maxDistance)
+            : this(name)
+        {
+            Speed = speed;
+            MaxDistance = maxDistance;
+        }
+
+        public abstract void Delivery();
     }
 }
