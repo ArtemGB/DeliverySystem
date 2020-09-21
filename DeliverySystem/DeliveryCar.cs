@@ -42,12 +42,14 @@ namespace DeliverySystem
             }
         }
 
+        //Основная коллекция груза
+        private List<Product> CargoCore { get; set; }
         /// <summary>
-        /// Груз/
+        /// Груз.
         /// </summary>
-        public List<Product> Cargo;
+        public IReadOnlyCollection<Product> Cargo { get; private set; } //Внешняя коллекция, которая позволяет только читать данные.
         /// <summary>
-        /// Грузоподъёмность машины/
+        /// Грузоподъёмность машины.
         /// </summary>
         public readonly double CarryingCapacity;
 
@@ -56,11 +58,19 @@ namespace DeliverySystem
         {
             id = Interlocked.Increment(ref GlobalCarID);
             CarryingCapacity = carryingCapacity;
+            CargoCore = new List<Product>();
+            Cargo = CargoCore.AsReadOnly();
+
         }
 
         public override void Delivery(DeliveryOrder order)
         {
             throw new NotImplementedException();
+        }
+
+        public void AddProduct(Product product)
+        {
+            CargoCore.Add(product);
         }
     }
 }
