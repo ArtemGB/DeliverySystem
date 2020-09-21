@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace DeliverySystem
 {
-    class Courier : Deliveryman
+    class DeliveryCar : Deliveryman
     {
-
-        private static int globalCourierID;
+        private static int GlobalCarID;
         private readonly int id;
-        public override int ID
-        {
-            get => id;
-        }
+        public override int ID => id;
 
         private int speed;
         public override int Speed
@@ -27,7 +22,7 @@ namespace DeliverySystem
                     Status = DeliveryStatus.NotWorking;
                 }
                 else
-                    if (value > 10) speed = 10;
+                    if (value > 50) speed = 50;
                 else 
                     speed = value;
             }
@@ -41,17 +36,26 @@ namespace DeliverySystem
             {
                 if (value < 0) maxDistance = 0;
                 else
-                    if (value > 50) maxDistance = 50;
-                else 
+                    if (value > 500) maxDistance = 50;
+                else
                     maxDistance = value;
             }
         }
 
-        public Courier(string name, int speed, int maxDistance)
+        /// <summary>
+        /// Груз/
+        /// </summary>
+        public List<Product> Cargo;
+        /// <summary>
+        /// Грузоподъёмность машины/
+        /// </summary>
+        public readonly double CarryingCapacity;
+
+        public DeliveryCar(string name, int speed, int maxDistance, double carryingCapacity)
             : base(name, speed, maxDistance)
         {
-            id = Interlocked.Increment(ref globalCourierID);
-            Speed = speed;
+            id = Interlocked.Increment(ref GlobalCarID);
+            CarryingCapacity = carryingCapacity;
         }
 
         public override void Delivery(DeliveryOrder order)

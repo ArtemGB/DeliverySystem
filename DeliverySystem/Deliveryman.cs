@@ -35,6 +35,6 @@ namespace DeliverySystem
             MaxDistance = maxDistance;
         }
 
-        public abstract void Delivery();
+        public abstract void Delivery(DeliveryOrder order);
     }
 }
