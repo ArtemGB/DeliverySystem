@@ -6,7 +6,7 @@ namespace DeliverySystem
     class Courier : Deliveryman
     {
 
-        private static int globalCourierID;
+        private static int globalID;
         private readonly int id;
         public override int ID
         {
@@ -48,7 +48,7 @@ namespace DeliverySystem
         public Courier(string name, int speed, int maxDistance)
             : base(name, speed, maxDistance)
         {
-            id = Interlocked.Increment(ref globalCourierID);
+            id = Interlocked.Increment(ref globalID);
             Speed = speed;
         }
 

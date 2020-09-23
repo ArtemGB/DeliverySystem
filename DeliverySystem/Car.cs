@@ -4,9 +4,12 @@ using System.Threading;
 
 namespace DeliverySystem
 {
-    class DeliveryCar : Deliveryman
+    /// <summary>
+    /// Грузовая машина.
+    /// </summary>
+    class Car : Deliveryman
     {
-        private static int GlobalCarID;
+        private static int globalID;
         private readonly int id;
         public override int ID => id;
 
@@ -47,16 +50,17 @@ namespace DeliverySystem
         /// <summary>
         /// Груз.
         /// </summary>
-        public IReadOnlyCollection<Product> Cargo { get; private set; } //Внешняя коллекция, которая позволяет только читать данные.
+        //Внешняя коллекция, которая позволяет только читать данные.
+        public IReadOnlyCollection<Product> Cargo { get; private set; } 
         /// <summary>
         /// Грузоподъёмность машины.
         /// </summary>
         public readonly double CarryingCapacity;
 
-        public DeliveryCar(string name, int speed, int maxDistance, double carryingCapacity)
+        public Car(string name, int speed, int maxDistance, double carryingCapacity)
             : base(name, speed, maxDistance)
         {
-            id = Interlocked.Increment(ref GlobalCarID);
+            id = Interlocked.Increment(ref globalID);
             CarryingCapacity = carryingCapacity;
             CargoCore = new List<Product>();
             Cargo = CargoCore.AsReadOnly();
