@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace DeliverySystem.DeliveyCore.Data
+namespace DeliverySystem.DeliveryCore.Data
 {
     /// <summary>
     /// Грузовая машина.

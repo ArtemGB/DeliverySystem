@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace DeliverySystem.DeliveyCore.Data
+namespace DeliverySystem.DeliveryCore.Data
 {
     class Courier : Deliveryman
     {

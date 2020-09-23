@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DeliverySystem.DeliveyCore.Management
+namespace DeliverySystem.DeliveryCore.Management
 {
     class ClientManager
     {
