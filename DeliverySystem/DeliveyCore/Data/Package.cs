@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace DeliverySystem
+namespace DeliverySystem.DeliveyCore.Data
 {
     class Package : Deliveryman
     {
@@ -37,7 +37,7 @@ namespace DeliverySystem
             id = Interlocked.Increment(ref globalID);
         }
 
-        public override void Delivery(DeliveryOrder order)
+        public override void Delivery(Order order)
         {
             throw new NotImplementedException();
         }

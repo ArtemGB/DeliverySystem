@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace DeliverySystem
+namespace DeliverySystem.DeliveyCore.Data
 {
     class Courier : Deliveryman
     {
@@ -52,7 +52,7 @@ namespace DeliverySystem
             Speed = speed;
         }
 
-        public override void Delivery(DeliveryOrder order)
+        public override void Delivery(Order order)
         {
             throw new NotImplementedException();
         }

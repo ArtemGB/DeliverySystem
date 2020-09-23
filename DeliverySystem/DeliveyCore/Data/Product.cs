@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace DeliverySystem
+namespace DeliverySystem.DeliveyCore.Data
 {
     class Product
     {

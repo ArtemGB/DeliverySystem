@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DeliverySystem
+﻿namespace DeliverySystem.DeliveyCore.Data
 {
     /// <summary>
     /// Базовый класс для всех доствзиков.
@@ -35,6 +31,6 @@ namespace DeliverySystem
             MaxDistance = maxDistance;
         }
 
-        public abstract void Delivery(DeliveryOrder order);
+        public abstract void Delivery(Order order);
     }
 }

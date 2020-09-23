@@ -1,4 +1,4 @@
-﻿namespace DeliverySystem
+﻿namespace DeliverySystem.DeliveyCore.Data
 {
     enum DeliveryStatus
     {

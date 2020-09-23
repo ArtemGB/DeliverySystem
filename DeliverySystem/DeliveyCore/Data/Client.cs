@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 
-namespace DeliverySystem
+namespace DeliverySystem.DeliveyCore.Data
 {
     class Client
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DeliverySystem
+namespace DeliverySystem.DeliveyCore.Management
 {
-    class DeliveryOrder
+    class ClientManager
     {
     }
 }

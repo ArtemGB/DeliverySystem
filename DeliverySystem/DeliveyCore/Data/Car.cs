@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace DeliverySystem
+namespace DeliverySystem.DeliveyCore.Data
 {
     /// <summary>
     /// Грузовая машина.
@@ -46,7 +46,7 @@ namespace DeliverySystem
         }
 
         //Основная коллекция груза
-        private List<Product> CargoCore { get; set; }
+        private List<Product> cargo { get; set; }
         /// <summary>
         /// Груз.
         /// </summary>
@@ -62,19 +62,19 @@ namespace DeliverySystem
         {
             id = Interlocked.Increment(ref globalID);
             CarryingCapacity = carryingCapacity;
-            CargoCore = new List<Product>();
-            Cargo = CargoCore.AsReadOnly();
+            cargo = new List<Product>();
+            Cargo = cargo.AsReadOnly();
 
         }
 
-        public override void Delivery(DeliveryOrder order)
+        public override void Delivery(Order order)
         {
             throw new NotImplementedException();
         }
 
         public void AddProduct(Product product)
         {
-            CargoCore.Add(product);
+            cargo.Add(product);
         }
     }
 }
