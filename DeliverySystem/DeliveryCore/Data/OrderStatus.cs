@@ -2,6 +2,7 @@
 {
     enum OrderStatus
     {
+        Accepted,
         Waiting,
         InProgress,
         Complete,

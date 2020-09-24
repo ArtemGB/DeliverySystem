@@ -16,7 +16,7 @@ namespace DeliverySystem.DeliveryCore.Data
             get
             {
                 double weight = default;
-                if(Products != null)
+                if (Products != null)
                     foreach (var prod in Products)
                         weight += prod.Weight;
                 return weight;
@@ -36,11 +36,29 @@ namespace DeliverySystem.DeliveryCore.Data
             }
         }
 
+        public OrderStatus Status { get; private set; }
+
+        public readonly DateTime CreateDataTime;
+
+        private DateTime completeDataTime;
+        public DateTime CompleteDataTime
+        {
+            get
+            {
+                if (Status == OrderStatus.Complete)
+                    return completeDataTime;
+                else throw new Exception("Заказ не завершён");
+            }
+        }
+
         public Order(Client client)
         {
             ID = Interlocked.Increment(ref globalID);
             Products = new List<Product>();
             Client = client;
+            CreateDataTime = DateTime.Now;
+            completeDataTime = new DateTime();
+            Status = OrderStatus.Accepted;
         }
 
         public Order(Client client, string address2)
@@ -51,10 +69,15 @@ namespace DeliverySystem.DeliveryCore.Data
         }
 
         public Order(Client client, string address1, string address2)
-            :this(client)
+            : this(client)
         {
             Address1 = address1;
             Address2 = address2;
+        }
+
+        public void CompleteOrder()
+        {
+            completeDataTime = DateTime.Now;
         }
     }
 }
