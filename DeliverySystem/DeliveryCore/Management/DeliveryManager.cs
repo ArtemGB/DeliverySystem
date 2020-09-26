@@ -13,7 +13,7 @@ namespace DeliverySystem.DeliveryCore.Management
         public IReadOnlyDictionary<int, Car> Cars;
 
         private Dictionary<int, Package> packages;
-        public Dictionary<int, Package> Packages;
+        public IReadOnlyDictionary<int, Package> Packages;
 
         public DeliveryManager()
         {
@@ -23,7 +23,6 @@ namespace DeliverySystem.DeliveryCore.Management
             Cars = cars;
             packages = new Dictionary<int, Package>();
             Packages = packages;
-            Car car = new Car("edwe", 15, 15, 15);
             
         }
 
@@ -36,14 +35,43 @@ namespace DeliverySystem.DeliveryCore.Management
 
         public void RemoveCourier(int ID)
         {
-            try
+            if (couriers.ContainsKey(ID))
             {
                 couriers.Remove(ID);
             }
-            catch (Exception ex)
+            else throw new ArgumentException("Такого курьера не существует.");
+        }
+
+        public Car AddCar(string name, int speed, int maxDistance, double carryingCapacity)
+        {
+            Car car = new Car(name, speed, maxDistance, carryingCapacity);
+            cars.Add(car.ID, car);
+            return car;
+        }
+
+        public void RemoveCar(int ID)
+        {
+            if (cars.ContainsKey(ID))
             {
-                throw new Exception(ex.Message);
+                cars.Remove(ID);
             }
+            else throw new ArgumentException("Такой машины не существует.");
+        }
+
+        public Package AddPackage(string name)
+        {
+            Package package = new Package(name);
+            packages.Add(package.ID, package);
+            return package;
+        }
+
+        public void RemovePackage(int ID)
+        {
+            if (packages.ContainsKey(ID))
+            {
+                packages.Remove(ID);
+            }
+            else throw new ArgumentException("Такой машиныпочтовой службы не существует.");
         }
     }
 }
