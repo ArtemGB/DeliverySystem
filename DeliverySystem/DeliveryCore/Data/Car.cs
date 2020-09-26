@@ -46,16 +46,30 @@ namespace DeliverySystem.DeliveryCore.Data
         }
 
         //Основная коллекция груза
-        private List<Product> cargo { get; set; }
         /// <summary>
         /// Груз.
         /// </summary>
+        private List<Product> cargo { get; set; }
         //Внешняя коллекция, которая позволяет только читать данные.
         public IReadOnlyCollection<Product> Cargo { get; private set; } 
+
         /// <summary>
         /// Грузоподъёмность машины.
         /// </summary>
         public readonly double CarryingCapacity;
+
+        public double CurrentCarryingCapacity 
+        {
+            get
+            {
+                double weight = default;
+                if (Cargo != null)
+                    foreach (var prod in Cargo)
+                        weight += prod.Weight;
+                return weight;
+            }
+
+        }
 
         public Car(string name, int speed, int maxDistance, double carryingCapacity)
             : base(name, speed, maxDistance)
@@ -64,7 +78,6 @@ namespace DeliverySystem.DeliveryCore.Data
             CarryingCapacity = carryingCapacity;
             cargo = new List<Product>();
             Cargo = cargo.AsReadOnly();
-
         }
 
         public override void Delivery(Order order)
@@ -74,6 +87,7 @@ namespace DeliverySystem.DeliveryCore.Data
 
         public void AddProduct(Product product)
         {
+            
             cargo.Add(product);
         }
     }

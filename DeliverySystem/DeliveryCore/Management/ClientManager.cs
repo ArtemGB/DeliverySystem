@@ -11,7 +11,7 @@ namespace DeliverySystem.DeliveryCore.Management
         // Это необходимо т.к. ключом является ID клиента
         // И нельзя допускать, чтобы можно было добавить клиента не с его ID
         // Т.е. сделать так. чтобы в ключ записывался тот ID, что и у клиента, а не случайное число.
-        private Dictionary<int, Client> clients { get; set; }
+        private Dictionary<int, Client> clients;
         public IReadOnlyDictionary<int, Client> Clients { get; private set; }
 
         public ClientManager()
@@ -21,32 +21,20 @@ namespace DeliverySystem.DeliveryCore.Management
         }
 
 
-        public void AddClient(Client client)
+        /// <summary>
+        /// Создаёт и возвращает нового клиента.
+        /// </summary>
+        /// <param name="name">Имя</param>
+        /// <param name="secondName">Фамилия</param>
+        /// <param name="address">Адрес</param>
+        /// <param name="phoneCode">Код номера</param>
+        /// <param name="phoneNumb">Номер телефона без кода</param>
+        /// <returns></returns>
+        public Client AddClient(string name, string secondName, string address, char phoneCode, string phoneNumb)
         {
-            if (client != null)
-            {
-                try
-                {
-                    // Добавляем клиента с его же ID.
-                    clients.Add(client.ID, client);
-                }
-                catch (Exception)
-                {
-                    throw new ArgumentException("Такой клиент уже существует.");
-                }
-            }
-        }
-
-        public void RemoveClient(Client client)
-        {
-            if (client != null)
-            {
-                if (clients.ContainsKey(client.ID))
-                    clients.Remove(client.ID);
-                else 
-                    throw new ArgumentException("Такого клиента не существует.");
-            }
-            else throw new ArgumentException("Параметр client равен null.");
+            Client newClient = new Client(name, secondName, address, phoneCode, phoneNumb);
+            clients.Add(newClient.ID, newClient);
+            return newClient;
         }
 
         public void RemoveClient(int ID)

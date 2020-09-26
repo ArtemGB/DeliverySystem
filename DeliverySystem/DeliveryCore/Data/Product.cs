@@ -19,38 +19,9 @@ namespace DeliverySystem.DeliveryCore.Data
             }
         }
 
-        private double length;
-        public double Length
-        {
-            get => length;
-            set
-            {
-                if (value < 0) throw new ArgumentException("Значение длинны не может быть меньше нуля.");
-                length = value;
-            }
-        }
+        public readonly Demensions Demensions;
 
-        private double width;
-        public double Width
-        {
-            get => width;
-            set
-            {
-                if (value < 0) throw new ArgumentException("Значение ширины не может быть меньше нуля.");
-                width = value;
-            }
-        }
-
-        private double height;
-        public double Height
-        {
-            get => height;
-            set
-            {
-                if (value < 0) throw new ArgumentException("Значение высоты не может быть меньше нуля.");
-                height = value;
-            }
-        }
+        
 
         /// <summary>
         /// Хрупкий товар.
@@ -60,9 +31,7 @@ namespace DeliverySystem.DeliveryCore.Data
         public Product(string name)
         {
             Name = name;
-            Length = 0;
-            Width = 0;
-            Height = 0;
+            Demensions = new Demensions();
             Brittle = false;
             ID = Interlocked.Increment(ref globalID);
         }
@@ -70,9 +39,13 @@ namespace DeliverySystem.DeliveryCore.Data
         public Product(string name, int Length, int Width, int Hieght)
             : this(name)
         {
-            this.Length = Length;
-            this.Width = Width;
-            this.Height = Hieght;
+            Demensions = new Demensions(Length, Width, Hieght);
+        }
+
+        public Product(string name, Demensions demensions)
+            :this(name)
+        {
+            Demensions = demensions;
         }
 
         public Product(string name, int Length, int Width, int Hieght, bool Brittle)

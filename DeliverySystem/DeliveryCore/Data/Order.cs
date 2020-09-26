@@ -37,6 +37,7 @@ namespace DeliverySystem.DeliveryCore.Data
         }
 
         public OrderStatus Status { get; private set; }
+        public bool IsBrittle { get; set; }
 
         public readonly DateTime CreateDataTime;
 

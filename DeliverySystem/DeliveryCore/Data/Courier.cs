@@ -49,7 +49,6 @@ namespace DeliverySystem.DeliveryCore.Data
             : base(name, speed, maxDistance)
         {
             id = Interlocked.Increment(ref globalID);
-            Speed = speed;
         }
 
         public override void Delivery(Order order)
