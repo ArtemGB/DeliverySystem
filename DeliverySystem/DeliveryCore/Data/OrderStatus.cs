@@ -3,7 +3,7 @@
     enum OrderStatus
     {
         Accepted,
-        Waiting,
+        Assembly,
         InProgress,
         Complete,
         Canceled

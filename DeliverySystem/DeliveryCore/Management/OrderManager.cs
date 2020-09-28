@@ -33,9 +33,31 @@ namespace DeliverySystem.DeliveryCore.Management
             return order;
         }
 
-        public void CancelOrder(int ID)
+        public void CancelOrder(Order order)
         {
-
+            if (order != null)
+            {
+                switch (order.Status)
+                {
+                    case OrderStatus.Accepted:
+                        acceptedOrders.Remove(order.ID);
+                        canceledOrders.Add(order.ID, order);
+                        break;
+                    case OrderStatus.Complete:
+                        throw new ArgumentException("Заказ уже завершён.");
+                    case OrderStatus.InProgress:
+                        inProgressOrders.Remove(order.ID);
+                        canceledOrders.Add(order.ID, order);
+                        break;
+                    case OrderStatus.Assembly:
+                        acceptedOrders.Remove(order.ID);
+                        canceledOrders.Add(order.ID, order);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else throw new ArgumentNullException("Параметр order равен null.");
         }
     }
 }

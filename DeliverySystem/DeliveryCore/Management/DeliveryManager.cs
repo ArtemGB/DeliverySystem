@@ -82,7 +82,7 @@ namespace DeliverySystem.DeliveryCore.Management
             {
                 packages.Remove(ID);
             }
-            else throw new ArgumentException("Такой машиныпочтовой службы не существует.");
+            else throw new ArgumentException("Такой почтовой службы не существует.");
         }
     }
 }
