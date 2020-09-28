@@ -26,6 +26,13 @@ namespace DeliverySystem.DeliveryCore.Management
             
         }
 
+        /// <summary>
+        /// Создаёт нового курьера и добавляет его в коллекцию курьеров.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="speed"></param>
+        /// <param name="maxDistance"></param>
+        /// <returns>Новый курьер.</returns>
         public Courier AddCourier(string name, int speed, int maxDistance)
         {
             Courier courier = new Courier(name, speed, maxDistance);
@@ -33,6 +40,10 @@ namespace DeliverySystem.DeliveryCore.Management
             return courier;
         }
 
+        /// <summary>
+        /// Удаляет курьера по ID, в случае отсутствия курьера с указанным ID, генерирует исключение.
+        /// </summary>
+        /// <param name="ID"></param>
         public void RemoveCourier(int ID)
         {
             if (couriers.ContainsKey(ID))
