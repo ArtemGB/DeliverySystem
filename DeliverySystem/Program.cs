@@ -8,12 +8,13 @@ namespace DeliverySystem
     {
         static void Main(string[] args)
         {
-            Car Car = new Car("Car", 60, 700, 5);
-            Console.WriteLine("{0}, {1}, {2}, {3}", Car.Name, Car.Speed, Car.MaxDistance, Car.CarryingCapacity);
-            Console.WriteLine($"{Car.ID}");
-            Car.AddProduct(new Product("pr"));
-            Car.AddProduct(new Product("pr2"));
-            foreach (var item in Car.Cargo)
+            Car TestCar = new Car("Car", 60, 700, 5);
+            Console.WriteLine("{0}, {1}, {2}, {3}", TestCar.Name, TestCar.Speed, TestCar.MaxDistance, TestCar.CarryingCapacity);
+            Console.WriteLine($"{TestCar.ID}");
+            TestCar.AddProduct(new Product("Сайга-9"));
+            TestCar.AddProduct(new Product("TR3"));
+            //TestCar.Cargo[0] = new Product("dfewf");
+            foreach (var item in TestCar.Cargo)
             {
                 Console.WriteLine(item.Name);
             }
@@ -24,14 +25,12 @@ namespace DeliverySystem
                 Console.WriteLine(item.Key);
                 Console.WriteLine($"Name:{item.Value.Name} SecName:{item.Value.SecondName}");
             }
-            manager.RemoveClient(1);
             Console.WriteLine("---------------------");
             foreach (var item in manager.Clients)
             {
                 Console.WriteLine(item.Key);
                 Console.WriteLine($"Name:{item.Value.Name} SecName:{item.Value.SecondName}");
             }
-            Console.WriteLine(manager.Clients[1].Address);
         }
     }
 }

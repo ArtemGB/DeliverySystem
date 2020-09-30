@@ -49,9 +49,9 @@ namespace DeliverySystem.DeliveryCore.Data
         /// <summary>
         /// Груз.
         /// </summary>
-        private List<Product> cargo { get; set; }
-        //Внешняя коллекция, которая позволяет только читать данные.
-        public IReadOnlyCollection<Product> Cargo { get; private set; } 
+        private List<Product> cargo;
+        //Коллекция для внешнего пользования, которая позволяет только просматривать данные.
+        public IReadOnlyList<Product> Cargo { get; private set; } 
 
         /// <summary>
         /// Грузоподъёмность машины.
@@ -70,6 +70,9 @@ namespace DeliverySystem.DeliveryCore.Data
             }
 
         }
+        /*
+         * 
+         */
 
         public Car(string name, int speed, int maxDistance, double carryingCapacity)
             : base(name, speed, maxDistance)
@@ -77,7 +80,7 @@ namespace DeliverySystem.DeliveryCore.Data
             id = Interlocked.Increment(ref globalID);
             CarryingCapacity = carryingCapacity;
             cargo = new List<Product>();
-            Cargo = cargo.AsReadOnly();
+            Cargo = cargo;
         }
 
         public override void Delivery(Order order)
