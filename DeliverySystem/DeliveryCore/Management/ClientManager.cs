@@ -12,6 +12,9 @@ namespace DeliverySystem.DeliveryCore.Management
         // И нельзя допускать, чтобы можно было добавить клиента не с его ID
         // Т.е. сделать так. чтобы в ключ записывался тот ID, что и у клиента, а не случайное число.
         private Dictionary<int, Client> clients;
+        /// <summary>
+        /// Клиенты
+        /// </summary>
         public IReadOnlyDictionary<int, Client> Clients { get; private set; }
 
         public ClientManager()
@@ -19,7 +22,6 @@ namespace DeliverySystem.DeliveryCore.Management
             clients = new Dictionary<int, Client>();
             Clients = clients;
         }
-
 
         /// <summary>
         /// Создаёт и возвращает нового клиента.
@@ -29,7 +31,7 @@ namespace DeliverySystem.DeliveryCore.Management
         /// <param name="address">Адрес</param>
         /// <param name="phoneCode">Код номера</param>
         /// <param name="phoneNumb">Номер телефона без кода</param>
-        /// <returns></returns>
+        /// <returns>Новый клиент.</returns>
         public Client AddClient(string name, string secondName, string address, char phoneCode, string phoneNumb)
         {
             Client newClient = new Client(name, secondName, address, phoneCode, phoneNumb);
@@ -37,6 +39,10 @@ namespace DeliverySystem.DeliveryCore.Management
             return newClient;
         }
 
+        /// <summary>
+        /// Удаляние клиенты по его ID
+        /// </summary>
+        /// <param name="ID">ID</param>
         public void RemoveClient(int ID)
         {
             if (clients.ContainsKey(ID))

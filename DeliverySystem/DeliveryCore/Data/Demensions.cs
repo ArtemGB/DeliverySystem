@@ -8,7 +8,7 @@ namespace DeliverySystem.DeliveryCore.Data
         public double Length
         {
             get => length;
-            set
+            private set
             {
                 if (value < 0) throw new ArgumentException("Значение длинны не может быть меньше нуля.");
                 length = value;
@@ -19,7 +19,7 @@ namespace DeliverySystem.DeliveryCore.Data
         public double Width
         {
             get => width;
-            set
+            private set
             {
                 if (value < 0) throw new ArgumentException("Значение ширины не может быть меньше нуля.");
                 width = value;
@@ -30,25 +30,21 @@ namespace DeliverySystem.DeliveryCore.Data
         public double Height
         {
             get => height;
-            set
+            private set
             {
                 if (value < 0) throw new ArgumentException("Значение высоты не может быть меньше нуля.");
                 height = value;
             }
         }
 
-        public Demensions()
-        {
-            Length = 0;
-            Width = 0;
-            Height = 0;
-        }
+        public readonly double Volume;
 
         public Demensions(double length, double width, double height)
         {
             Length = length;
             Width = width;
             Height = height;
+            Volume = Length * Width * Height;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace DeliverySystem.DeliveryCore.Data
@@ -13,16 +14,12 @@ namespace DeliverySystem.DeliveryCore.Data
         public string Address2 { get; set; }
         public double Weight
         {
-            get
-            {
-                double weight = default;
-                if (Products != null)
-                    foreach (var prod in Products)
-                        weight += prod.Weight;
-                return weight;
-            }
+            get => Products.Sum(prod => prod.Weight);
         }
-
+        public double Volume
+        {
+            get => Products.Sum(prod => prod.Demensions.Volume);
+        }
         public List<Product> Products { get; private set; }
 
         private double distance;
@@ -57,6 +54,8 @@ namespace DeliverySystem.DeliveryCore.Data
             ID = Interlocked.Increment(ref globalID);
             Products = new List<Product>();
             Client = client;
+            Address1 = "";
+            Address2 = "";
             CreateDataTime = DateTime.Now;
             completeDataTime = new DateTime();
             Status = OrderStatus.Accepted;

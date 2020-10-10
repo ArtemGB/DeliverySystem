@@ -21,29 +21,27 @@ namespace DeliverySystem.DeliveryCore.Data
 
         public readonly Demensions Demensions;
 
-        
-
         /// <summary>
         /// Хрупкий товар.
         /// </summary>
         public bool Brittle { get; set; }
 
-        public Product(string name)
+        private Product()
         {
-            Name = name;
-            Demensions = new Demensions();
-            Brittle = false;
             ID = Interlocked.Increment(ref globalID);
+            Brittle = false;
         }
 
         public Product(string name, int Length, int Width, int Hieght)
-            : this(name)
+            : this()
         {
+            
+            Name = name;
             Demensions = new Demensions(Length, Width, Hieght);
         }
 
         public Product(string name, Demensions demensions)
-            :this(name)
+            :this()
         {
             Demensions = demensions;
         }
