@@ -11,8 +11,8 @@ namespace DeliverySystem
             Car TestCar = new Car("Car", 60, 700, 5);
             Console.WriteLine("{0}, {1}, {2}, {3}", TestCar.Name, TestCar.Speed, TestCar.MaxDistance, TestCar.CarryingCapacity);
             Console.WriteLine($"{TestCar.ID}");
-            TestCar.AddProduct(new Product("Сайга-9"));
-            TestCar.AddProduct(new Product("TR3"));
+            TestCar.AddProduct(new Product("Сайга-9", new Demensions(1,0.1,0.2)));
+            TestCar.AddProduct(new Product("TR3", new Demensions(1, 0.1, 0.2)));
             //TestCar.Cargo[0] = new Product("dfewf");
             foreach (var item in TestCar.Cargo)
             {

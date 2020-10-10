@@ -33,7 +33,7 @@ namespace DeliverySystem.DeliveryCore.Data
             }
         }
 
-        public OrderStatus Status { get; private set; }
+        public OrderStatus Status { get; set; }
         public bool IsBrittle { get; set; }
 
         public readonly DateTime CreateDataTime;
@@ -78,6 +78,7 @@ namespace DeliverySystem.DeliveryCore.Data
         public void CompleteOrder()
         {
             completeDataTime = DateTime.Now;
+            Status = OrderStatus.Complete;
         }
     }
 }

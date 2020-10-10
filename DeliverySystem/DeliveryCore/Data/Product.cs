@@ -16,6 +16,7 @@ namespace DeliverySystem.DeliveryCore.Data
             set
             {
                 if (value < 0) throw new ArgumentException("Значение веса не может быть меньше нуля.");
+                else weight = value;
             }
         }
 

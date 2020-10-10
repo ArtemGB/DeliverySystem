@@ -29,11 +29,18 @@ namespace DeliverySystem.DeliveryCore.Management
         /// Уведомление о создании заказа.
         /// </summary>
         public event OrderCreatedHandler OrderCreatedNotify;
+
         public delegate void OrderCanceledHandler(Order order);
         /// <summary>
         /// Уведомление об отмене заказа.
         /// </summary>
         public event OrderCanceledHandler OrderCanceledNotify;
+
+        public delegate void OrderStatusChanged(Order order, OrderStatus PreviosStatus, OrderStatus NewStatus);
+        /// <summary>
+        /// Уведомление о смене статуса заказа.
+        /// </summary>
+        public event OrderStatusChanged OrderStatusChangedNotify;
 
         public OrderManager()
         {
@@ -78,6 +85,7 @@ namespace DeliverySystem.DeliveryCore.Management
                 {
                     case OrderStatus.Accepted:
                         acceptedOrders.Remove(order.ID);
+                        UpOrderStatus(order, OrderStatus.Canceled);
                         canceledOrders.Add(order.ID, order);
                         //Уведомляем об отмене заказа.
                         OrderCanceledNotify?.Invoke(order);
@@ -86,12 +94,14 @@ namespace DeliverySystem.DeliveryCore.Management
                         throw new ArgumentException("Заказ уже завершён.");
                     case OrderStatus.InProgress:
                         inProgressOrders.Remove(order.ID);
+                        UpOrderStatus(order, OrderStatus.Canceled);
                         canceledOrders.Add(order.ID, order);
                         //Уведомляем об отмене заказа.
                         OrderCanceledNotify?.Invoke(order);
                         break;
                     case OrderStatus.Assembly:
                         acceptedOrders.Remove(order.ID);
+                        UpOrderStatus(order, OrderStatus.Canceled);
                         canceledOrders.Add(order.ID, order);
                         //Уведомляем об отмене заказа.
                         OrderCanceledNotify?.Invoke(order);
@@ -103,12 +113,17 @@ namespace DeliverySystem.DeliveryCore.Management
             else throw new ArgumentNullException("Параметр order равен null.");
         }
 
-        public void ChangeOrderStatus(Order order, OrderStatus newStatus)
+
+        //ДОДЕЛАТЬ!!!!
+        public void UpOrderStatus(Order order, OrderStatus newStatus)
         {
             if((int)order.Status < (int)newStatus)
             {
-                //order.Status = newStatus;
+                OrderStatus PrevStatus = order.Status;
+                order.Status = newStatus;
+                OrderStatusChangedNotify(order, PrevStatus, newStatus);
             }
         }
+
     }
 }
