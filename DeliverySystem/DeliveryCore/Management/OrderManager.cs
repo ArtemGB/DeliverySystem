@@ -114,7 +114,7 @@ namespace DeliverySystem.DeliveryCore.Management
         }
 
 
-        //ДОДЕЛАТЬ!!!!
+        //TODO
         public void UpOrderStatus(Order order, OrderStatus newStatus)
         {
             if((int)order.Status < (int)newStatus)
